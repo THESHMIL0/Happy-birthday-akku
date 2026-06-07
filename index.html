@@ -3,260 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Akansha 🌷</title>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Dancing+Script:wght@700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <title>Happy Birthday Akansha! 🌷</title>
+    
+    <!-- Ultra Cute Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Fredoka:wght@400;600&family=Patrick+Hand&display=swap" rel="stylesheet">
+    
+    <!-- Confetti Trigger -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
         :root {
-            --soft-green: #e8f5e9;
-            --sage-green: #a5d6a7;
-            --deep-sage: #4e7d55;
-            --petal-pink: #fce4ec;
-            --white: rgba(255, 255, 255, 0.8);
+            --cute-green: #eef9f3;
+            --sage-pastel: #bfe7cd;
+            --mint-bright: #98dbb2;
+            --text-olive: #3d664c;
+            --blush-pink: #fbe3eb;
+            --card-shadow: 0 10px 30px rgba(165, 214, 167, 0.2);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><text y="20" font-size="20">🌷</text></svg>'), auto;
+            /* Custom Tulip Cursor */
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="22">🌷</text></svg>'), auto;
         }
 
         body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #f9fff9 0%, #e8f5e9 100%);
-            color: var(--deep-sage);
+            font-family: 'Fredoka', sans-serif;
+            background: linear-gradient(180deg, #fafffc 0%, var(--cute-green) 100%);
+            color: var(--text-olive);
             overflow-x: hidden;
+            padding-bottom: 100px;
         }
 
-        /* --- Floating Elements --- */
-        .floating-tulip {
-            position: fixed;
-            pointer-events: none;
-            z-index: 100;
-            animation: floatUp 6s linear forwards;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .typing-container {
-            font-family: 'Dancing Script', cursive;
-            font-size: 5rem;
-            color: var(--deep-sage);
-            margin-bottom: 1rem;
-        }
-
-        .typing-container::after {
-            content: "🌷";
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink { 50% { opacity: 0; } }
-
-        .sub-text {
-            font-size: 1.5rem;
-            background: var(--white);
-            padding: 10px 25px;
-            border-radius: 50px;
-            backdrop-filter: blur(5px);
-            border: 2px solid var(--sage-green);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        /* --- Cute Message Card --- */
-        .message-box {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 40px;
-            background: var(--white);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            border: 3px solid var(--sage-green);
-            position: relative;
-            transform: rotate(-1deg);
-            box-shadow: 15px 15px 0px var(--sage-green);
-        }
-
-        .message-box::before {
-            content: "✨";
+        /* --- Magical Sparkle Trail --- */
+        .sparkle {
             position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 2rem;
-        }
-
-        /* --- Polaroid Gallery --- */
-        .gallery {
-            padding: 80px 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-        }
-
-        .polaroid {
-            background: white;
-            padding: 15px 15px 50px 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid #eee;
-        }
-
-        .polaroid img {
-            width: 250px;
-            height: 300px;
-            object-fit: cover;
-            border: 1px solid #f9f9f9;
-        }
-
-        .polaroid p {
-            font-family: 'Caveat', cursive;
-            font-size: 1.8rem;
-            margin-top: 15px;
-            color: #555;
-        }
-
-        .polaroid:nth-child(odd) { transform: rotate(-3deg); }
-        .polaroid:nth-child(even) { transform: rotate(3deg); }
-
-        .polaroid:hover {
-            transform: scale(1.1) rotate(0deg) translateY(-10px);
-            box-shadow: 0 20px 40px rgba(165, 214, 167, 0.4);
-            z-index: 10;
-        }
-
-        /* --- Surprise Button --- */
-        .btn-surprise {
-            background: var(--sage-green);
-            color: white;
-            border: none;
-            padding: 20px 40px;
-            font-family: 'Quicksand', sans-serif;
+            pointer-events: none;
             font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 10px 20px rgba(165, 214, 167, 0.4);
-            margin-bottom: 100px;
+            animation: flyOut 1s ease-out forwards;
+            z-index: 9999;
         }
 
-        .btn-surprise:hover {
-            transform: scale(1.1);
-            background: var(--deep-sage);
+        @keyframes flyOut {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+            100% { transform: translate(var(--mx), var(--my)) scale(0) rotate(360deg); opacity: 0; }
         }
 
-        /* --- Music Toggle --- */
-        .music-toggle {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
+        /* --- Continuous Floating Ambient Background --- */
+        #ambientContainer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 1;
+        }
+        .ambient-item {
+            position: absolute; bottom: -50px;
+            animation: floatUpward 7s linear forwards;
+            opacity: 0.6;
+        }
+        @keyframes floatUpward {
+            0% { transform: translateY(0) scale(0.5) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-110vh) scale(1.2) rotate(180deg); opacity: 0; }
+        }
+
+        /* --- Floating Music Control --- */
+        .music-widget {
+            position: fixed; bottom: 25px; left: 25px;
+            background: white; border: 3px solid var(--sage-pastel);
+            width: 55px; height: 55px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; box-shadow: var(--card-shadow);
+            z-index: 1000; transition: transform 0.2s;
+        }
+        .music-widget:hover { transform: scale(1.1) rotate(10deg); }
+        .music-widget.playing { animation: heartBeat 1.5s infinite; background: var(--sage-pastel); }
+
+        /* --- Main Hero Screen --- */
+        header {
+            height: 90vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            position: relative; z-index: 2;
+            padding: 20px;
+        }
+
+        .title-bubble {
             background: white;
-            border: 3px solid var(--sage-green);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 30px 50px;
+            border-radius: 40px;
+            box-shadow: var(--card-shadow);
+            border: 3px solid var(--sage-pastel);
+            position: relative;
+            animation: gentleBounce 3s ease-in-out infinite;
+        }
+        
+        /* Deco tape on main box */
+        .title-bubble::before {
+            content: ""; position: absolute; top: -15px; left: 30%;
+            width: 100px; height: 30px; background: rgba(251, 227, 235, 0.7);
+            transform: rotate(-4deg); backdrop-filter: blur(2px);
+        }
+
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 4.5rem;
+            color: var(--text-olive);
+            line-height: 1;
+        }
+        .highlight-name { color: #ff7da1; font-size: 5.5rem; display: block; }
+
+        .cute-timer {
+            margin-top: 35px; font-size: 1.1rem; font-weight: 600;
+            background: var(--blush-pink); color: #8a4f62;
+            padding: 12px 30px; border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(251, 227, 235, 0.5);
+            border: 2px dashed #ffb3c6;
+        }
+
+        /* --- Aesthetic Big Letter Card --- */
+        .scrapbook-letter {
+            max-width: 650px; margin: 40px auto; padding: 45px;
+            background: white; border-radius: 30px;
+            box-shadow: var(--card-shadow);
+            border: 3px solid var(--sage-pastel);
+            position: relative; z-index: 2;
+            transform: rotate(1deg);
+        }
+        .scrapbook-letter p {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.6rem; line-height: 1.6; letter-spacing: 0.5px;
+        }
+        .deco-sticker { position: absolute; font-size: 2.5rem; top: -20px; right: 20px; }
+
+        /* --- Interactive Surprise Present --- */
+        .gift-zone { text-align: center; margin: 80px 0; position: relative; z-index: 2; }
+        .interactive-gift {
+            display: inline-block; font-size: 5.5rem;
+            animation: wiggleShake 2.5s infinite; transition: transform 0.2s;
+        }
+        .interactive-gift:hover { animation: none; transform: scale(1.2); }
+        .gift-hint { font-size: 1rem; font-weight: 600; margin-top: 10px; opacity: 0.8; }
+
+        .reveal-card {
+            display: none; background: white; padding: 35px; border-radius: 25px;
+            max-width: 450px; margin: -40px auto 80px auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            border: 3px solid var(--mint-bright);
+            animation: popUpIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            position: relative; z-index: 3;
+        }
+
+        /* --- 3D Flipping Polaroid Grid --- */
+        .gallery-section { max-width: 1100px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
+        .section-headline { font-family: 'Caveat', cursive; font-size: 3.5rem; margin-bottom: 40px; }
+
+        .grid-layout {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 50px;
+        }
+
+        /* 3D Structure Setup */
+        .polaroid-wrapper {
+            perspective: 1000px; height: 380px;
+        }
+        .polaroid-inner {
+            position: relative; width: 100%; height: 100%;
+            transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Trigger flip via active class toggle */
+        .polaroid-wrapper.flipped .polaroid-inner { transform: rotateY(180deg); }
+
+        .front-view, .back-view {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; border-radius: 4px;
+            background: white; padding: 15px 15px 40px 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid #eef3f0;
+        }
+        
+        .front-view img { width: 100%; height: 280px; object-fit: cover; border-radius: 2px; }
+        .caption-style { font-family: 'Caveat', cursive; font-size: 1.9rem; margin-top: 15px; color: #444; }
+
+        /* Back view of Polaroid note card */
+        .back-view {
+            transform: rotateY(180deg); background: #fafdfb;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border: 2px dashed var(--sage-pastel); padding: 25px;
+        }
+        .back-view p { font-family: 'Patrick Hand', cursive; font-size: 1.6rem; text-align: center; line-height: 1.4; }
+        .back-view span { font-size: 2.5rem; margin-top: 15px; }
+
+        /* Natural alignment deviations */
+        .polaroid-wrapper:nth-child(odd) { transform: rotate(-2.5deg); }
+        .polaroid-wrapper:nth-child(even) { transform: rotate(2.5deg); }
+        .polaroid-wrapper:hover { z-index: 10; }
+
+        /* --- Keyframe Definition Sets --- */
+        @keyframes gentleBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        @keyframes wiggleShake { 
+            0%, 100% { transform: rotate(0); } 20% { transform: rotate(-8deg); } 40% { transform: rotate(6deg); } 
+            60% { transform: rotate(-5deg); } 80% { transform: rotate(4deg); } 
+        }
+        @keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+        @keyframes popUpIn { from { opacity: 0; transform: scale(0.85) translateY(30px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 3.2rem; }
+            .highlight-name { font-size: 4rem; }
+            .scrapbook-letter { padding: 25px; margin: 20px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Ambient Floating Layer -->
+    <div id="ambientContainer"></div>
+
+    <!-- Hidden Audio Asset -->
     <audio id="bgMusic" loop>
         <source src="birthday-song.mp3" type="audio/mpeg">
     </audio>
+    <div class="music-widget" id="musicBtn" onclick="togglePlayback()">🎵</div>
 
-    <div class="music-toggle" onclick="toggleMusic()">🎵</div>
+    <!-- Hero Content Header -->
+    <header>
+        <div class="title-bubble">
+            <h1>Happy Birthday <span class="highlight-name">Akansha</span></h1>
+        </div>
+        <div class="cute-timer" id="clockBox">Preparing the magic...</div>
+    </header>
 
-    <section class="hero">
-        <div class="typing-container">Happy Birthday Akansha</div>
-        <div class="sub-text" id="timer">Your surprise is blooming...</div>
-    </section>
+    <main>
+        <!-- Letter Box -->
+        <section class="scrapbook-letter">
+            <div class="deco-sticker">✨</div>
+            <p>
+                Happy Birthday to a genuinely spectacular friend! 🌷 <br><br>
+                Akansha, I hope your special day is packed with endless smiling, sweet moments, and all your favorite adorable sage-green things. Thank you for radiating so much warmth and happiness wherever you go. Enjoy every bit of your celebration today! 🎉🟢
+            </p>
+        </section>
 
-    <section class="message-box">
-        <p style="font-size: 1.2rem; line-height: 1.6;">
-            Happy Birthday to the most wonderful person! 🌷 <br><br>
-            Akansha, I hope your day is filled with as much joy as you bring to everyone around you. You deserve a year full of flowers, laughter, and your favorite "cute green" things! 
-        </p>
-    </section>
+        <!-- Interactive Surprise Section -->
+        <section class="gift-zone">
+            <div class="interactive-gift" id="giftBoxAsset" onclick="unwrapSurprise()">🎁</div>
+            <div class="gift-hint">TAP THE GIFT TO UNWRAP IT! ✨</div>
+            
+            <div class="reveal-card" id="hiddenGiftCard">
+                <h3 style="font-family: 'Caveat', cursive; font-size: 2.8rem; color: #ff7da1; margin-bottom: 8px;">Surprise Note! 📜</h3>
+                <p style="font-family: 'Patrick Hand', cursive; font-size: 1.5rem;">You are immensely appreciated! May this upcoming year ahead bring you pure happiness and countless memories. Have a wonderful birthday! 🍰🌷</p>
+            </div>
+        </section>
 
-    <div class="gallery">
-        <div class="polaroid"><img src="1.jpg"><p>Cutest 🌷</p></div>
-        <div class="polaroid"><img src="2.jpg"><p>Bestie ✨</p></div>
-        <div class="polaroid"><img src="3.jpg"><p>Memories 🤍</p></div>
-        <div class="polaroid"><img src="4.jpg"><p>The Day ☀️</p></div>
-    </div>
+        <!-- Photo Gallery Area -->
+        <section class="gallery-section">
+            <h2 class="section-headline">Tap to read the secret notes! 📸</h2>
+            
+            <div class="grid-layout">
+                <!-- Card 1 -->
+                <div class="polaroid-wrapper" onclick="flipCard(this)">
+                    <div class="polaroid-inner">
+                        <div class="front-view">
+                            <img src="1.jpg" alt="Memory Image">
+                            <div class="caption-style">Happiest Days ✨</div>
+                        </div>
+                        <div class="back-view">
+                            <p>"So incredibly glad to have you around. Never stop laughing!"</p>
+                            <span>🌷</span>
+                        </div>
+                    </div>
+                </div>
 
-    <div style="text-align: center;">
-        <button class="btn-surprise" onclick="popSurprise()">Click for a Hug! 🤗</button>
-    </div>
+                <!-- Card 2 -->
+                <div class="polaroid-wrapper" onclick="flipCard(this)">
+                    <div class="polaroid-inner">
+                        <div class="front-view">
+                            <img src="2.jpg" alt="Memory Image">
+                            <div class="caption-style">Keep Smiling 🌸</div>
+                        </div>
+                        <div class="back-view">
+                            <p>"Your positive energy and bright smile can change the entire mood of a room instantly!"</p>
+                            <span>✨</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="polaroid-wrapper" onclick="flipCard(this)">
+                    <div class="polaroid-inner">
+                        <div class="front-view">
+                            <img src="3.jpg" alt="Memory Image">
+                            <div class="caption-style">Best Moments 🤍</div>
+                        </div>
+                        <div class="back-view">
+                            <p>"Wishing you endless adventures, cozy afternoons, and unlimited joy."</p>
+                            <span>🟢</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="polaroid-wrapper" onclick="flipCard(this)">
+                    <div class="polaroid-inner">
+                        <div class="front-view">
+                            <img src="4.jpg" alt="Memory Image">
+                            <div class="caption-style">The Best Friend ☀️</div>
+                        </div>
+                        <div class="back-view">
+                            <p>"To many more inside jokes, sweet desserts, and beautiful memories ahead!"</p>
+                            <span>🎂</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
 
     <script>
-        // --- 1. Countdown Logic ---
-        const target = new Date();
-        target.setDate(target.getDate() + 1);
-        target.setHours(0, 0, 0, 0);
+        // --- 1. Accurate Real-Time Countdown to Tomorrow (June 8, 2026) ---
+        const celebrationTarget = new Date("June 8, 2026 00:00:00").getTime();
 
-        function updateTimer() {
-            const now = new Date();
-            const diff = target - now;
-            if (diff <= 0) {
-                document.getElementById('timer').innerText = "IT'S YOUR BIRTHDAY! 🥳";
-                return;
+        const countdownLoop = setInterval(function() {
+            const currentMoment = new Date().getTime();
+            const timeDifference = celebrationTarget - currentMoment;
+
+            const hoursLeft = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutesLeft = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const secondsLeft = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            const timerDisplay = document.getElementById("clockBox");
+            
+            if (timeDifference <= 0) {
+                clearInterval(countdownLoop);
+                timerDisplay.innerHTML = "🥳 HAPPY BIRTHDAY AKANSHA! TIME TO CELEBRATE! 🎈";
+            } else {
+                timerDisplay.innerHTML = `🌷 Birthday Surprise Unlocks In: ${hoursLeft}h ${minutesLeft}m ${secondsLeft}s`;
             }
-            const h = Math.floor(diff / 3600000);
-            const m = Math.floor((diff % 3600000) / 60000);
-            const s = Math.floor((diff % 60000) / 1000);
-            document.getElementById('timer').innerText = `Blooming in: ${h}h ${m}m ${s}s 🌸`;
-        }
-        setInterval(updateTimer, 1000);
+        }, 1000);
 
-        // --- 2. Floating Tulips ---
-        function createTulip() {
-            const tulip = document.createElement('div');
-            tulip.className = 'floating-tulip';
-            tulip.innerText = '🌷';
-            tulip.style.left = Math.random() * 100 + 'vw';
-            tulip.style.fontSize = (Math.random() * 20 + 20) + 'px';
-            document.body.appendChild(tulip);
-            setTimeout(() => tulip.remove(), 6000);
-        }
-        setInterval(createTulip, 500);
+        // --- 2. Interactive Sparkles Mouse Trail ---
+        document.addEventListener('mousemove', function(e) {
+            const symbols = ['✨', '🌸', '💚', '🌷'];
+            const chosenSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            // Limit spawning frequency to keep performance clean
+            if (Math.random() > 0.25) return;
 
-        // --- 3. Music ---
-        function toggleMusic() {
-            const m = document.getElementById('bgMusic');
-            m.paused ? m.play() : m.pause();
+            const particle = document.createElement('span');
+            particle.classList.add('sparkle');
+            particle.innerText = chosenSymbol;
+            
+            particle.style.top = e.pageY + 'px';
+            particle.style.left = e.pageX + 'px';
+            
+            // Random offset vectors for dispersion direction
+            const moveX = (Math.random() - 0.5) * 80;
+            const moveY = (Math.random() - 0.5) * 80;
+            particle.style.setProperty('--mx', `${moveX}px`);
+            particle.style.setProperty('--my', `${moveY}px`);
+
+            document.body.appendChild(particle);
+            setTimeout(() => { particle.remove(); }, 1000);
+        });
+
+        // --- 3. Click Screen To Burst Petals ---
+        document.addEventListener('click', function(e) {
+            // Ignore if clicking interactive functional buttons
+            if(e.target.closest('.interactive-gift') || e.target.closest('.music-widget') || e.target.closest('.polaroid-wrapper')) return;
+
+            for(let i=0; i<8; i++) {
+                const petal = document.createElement('div');
+                petal.innerText = Math.random() > 0.5 ? '🌸' : '🌷';
+                petal.style.position = 'absolute';
+                petal.style.top = e.pageY + 'px';
+                petal.style.left = e.pageX + 'px';
+                petal.style.pointerEvents = 'none';
+                petal.style.fontSize = '1.3rem';
+                petal.style.transition = 'all 0.8s ease-out';
+                
+                document.body.appendChild(petal);
+
+                setTimeout(() => {
+                    petal.style.transform = `translate(${(Math.random() - 0.5) * 120}px, ${(Math.random() - 0.5) * 120}px) scale(0) rotate(180deg)`;
+                    petal.style.opacity = '0';
+                }, 50);
+
+                setTimeout(() => petal.remove(), 900);
+            }
+        });
+
+        // --- 4. Interactive 3D Polaroid Flip Trigger ---
+        function flipCard(cardElement) {
+            cardElement.classList.toggle('flipped');
         }
 
-        // --- 4. Confetti Surprise ---
-        function popSurprise() {
+        // --- 5. Present Box Opener Sequence ---
+        function unwrapSurprise() {
+            document.getElementById("hiddenGiftCard").style.display = "block";
+            document.getElementById("giftBoxAsset").style.transform = "scale(0)";
+            setTimeout(() => { document.getElementById("giftBoxAsset").style.display = "none"; }, 200);
+
+            // Confetti Shower Explosion Effect
             confetti({
-                particleCount: 150,
-                spread: 70,
+                particleCount: 140,
+                spread: 80,
                 origin: { y: 0.6 },
-                colors: ['#a5d6a7', '#fce4ec', '#ffffff']
+                colors: ['#bfe7cd', '#fbe3eb', '#ffffff', '#ff7da1']
             });
         }
+
+        // --- 6. Music Track Toggle ---
+        function togglePlayback() {
+            const soundtrack = document.getElementById("bgMusic");
+            const widget = document.getElementById("musicBtn");
+            
+            if (soundtrack.paused) {
+                soundtrack.play().catch(e => console.log("Audio waiting for explicit configuration setup."));
+                widget.classList.add('playing');
+            } else {
+                soundtrack.pause();
+                widget.classList.remove('playing');
+            }
+        }
+
+        // --- 7. Soft Ambient Background Engine ---
+        function triggerAmbientItem() {
+            const spaceContainer = document.getElementById('ambientContainer');
+            if(!spaceContainer) return;
+            
+            const decoBlob = document.createElement('div');
+            decoBlob.classList.add('ambient-item');
+            decoBlob.innerText = Math.random() > 0.5 ? '🌷' : '🍀';
+            
+            decoBlob.style.left = Math.random() * 100 + 'vw';
+            decoBlob.style.fontSize = (Math.random() * 12 + 16) + 'px';
+            decoBlob.style.animationDuration = (Math.random() * 3 + 6) + 's';
+
+            spaceContainer.appendChild(decoBlob);
+            setTimeout(() => { decoBlob.remove(); }, 9000);
+        }
+        setInterval(triggerAmbientItem, 750);
     </script>
 </body>
 </html>
