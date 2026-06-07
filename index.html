@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Akansha! 🌷</title>
-    <!-- Google Fonts for a cute, aesthetic look -->
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
@@ -27,11 +26,36 @@
             color: var(--cute-green-dark);
             overflow-x: hidden;
             text-align: center;
+            padding-bottom: 5rem;
+        }
+
+        /* Music Control Button */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--cute-green-main);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(90, 143, 118, 0.3);
+            z-index: 1000;
+            font-size: 1.3rem;
+            transition: transform 0.2s;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
         }
 
         /* Hero Section */
         header {
-            padding: 4rem 2rem 2rem 2rem;
+            padding: 5rem 2rem 2rem 2rem;
             position: relative;
         }
 
@@ -43,11 +67,18 @@
             animation: float 3s ease-in-out infinite;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0.8;
+        /* Countdown Timer */
+        .countdown-timer {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--cute-green-dark);
+            margin-top: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 1px solid var(--cute-green-main);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
         }
 
         /* Tulip Floating Background Animation */
@@ -61,18 +92,54 @@
             z-index: -1;
         }
 
-        /* Message Box */
-        .message-container {
-            max-width: 600px;
+        /* Surprise Gift Box Section */
+        .surprise-section {
             margin: 2rem auto;
-            padding: 2rem;
-            background: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(163, 217, 201, 0.3);
-            border: 2px dashed var(--cute-green-main);
+            max-width: 600px;
         }
 
-        .message-container p {
+        .gift-container {
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .gift-container:hover {
+            transform: scale(1.1);
+        }
+
+        .gift-box {
+            font-size: 4rem;
+            animation: wobble 2s infinite;
+        }
+
+        .tap-text {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 10px;
+            color: var(--cute-green-dark);
+            letter-spacing: 1px;
+        }
+
+        .hidden-message {
+            display: none;
+            margin: 0 auto;
+            padding: 2.5rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(163, 217, 201, 0.4);
+            border: 2px dashed var(--cute-green-main);
+            animation: fadeIn 1s ease-in forwards;
+            width: 90%;
+        }
+
+        .hidden-message h2 {
+            font-family: 'Caveat', cursive;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hidden-message p {
             font-size: 1.1rem;
             line-height: 1.6;
         }
@@ -80,56 +147,70 @@
         /* Photo Gallery - Polaroid Style */
         .gallery-title {
             font-family: 'Caveat', cursive;
-            font-size: 3rem;
-            margin: 3rem 0 1rem 0;
+            font-size: 3.5rem;
+            margin: 4rem 0 1.5rem 0;
         }
 
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2.5rem;
-            max-width: 1000px;
-            margin: 0 auto padding;
-            padding: 0 2rem 4rem 2rem;
+            gap: 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         .polaroid {
             background: var(--card-bg);
-            padding: 1rem 1rem 2.5rem 1rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            padding: 1.2rem 1.2rem 2.8rem 1.2rem;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.06);
             border-radius: 4px;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
         }
 
         .polaroid img {
             width: 100%;
-            height: 250px;
+            height: 280px;
             object-fit: cover;
             border-radius: 2px;
-            background-color: #eee; /* Placeholder before loading */
+            background-color: #f0f0f0; 
         }
 
-        /* Random slight rotation for look and feel */
-        .polaroid:nth-child(odd) { transform: rotate(-2deg); }
-        .polaroid:nth-child(even) { transform: rotate(2deg); }
+        /* Random rotation angles for a realistic casual look */
+        .polaroid:nth-child(4n+1) { transform: rotate(-3deg); }
+        .polaroid:nth-child(4n+2) { transform: rotate(2deg); }
+        .polaroid:nth-child(4n+3) { transform: rotate(-1.5deg); }
+        .polaroid:nth-child(4n+4) { transform: rotate(3deg); }
 
         .polaroid:hover {
-            transform: scale(1.05) rotate(0deg) !important;
-            box-shadow: 0 15px 30px rgba(90, 143, 118, 0.2);
+            transform: scale(1.06) rotate(0deg) !important;
+            box-shadow: 0 20px 35px rgba(90, 143, 118, 0.25);
+            z-index: 10;
         }
 
         .polaroid-caption {
             font-family: 'Caveat', cursive;
-            font-size: 1.6rem;
-            margin-top: 1rem;
-            color: #444;
+            font-size: 1.8rem;
+            margin-top: 1.2rem;
+            color: #333;
         }
 
-        /* Animations */
+        /* Keyframe Animations */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         @keyframes dynamicTulip {
@@ -149,65 +230,115 @@
 
     <div class="tulip-bg" id="tulipContainer"></div>
 
+    <div class="music-control" onclick="toggleMusic()">
+        <span id="musicIcon">🎵</span>
+        <audio id="bgMusic" loop>
+            <source src="birthday-song.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
     <header>
         <h1>Happy Birthday, Akansha! 🌷</h1>
-        <p class="subtitle">Wishing you the most beautiful day ✨</p>
+        <div id="countdown" class="countdown-timer">Calculating countdown...</div>
     </header>
 
     <main>
-        <section class="message-container">
-            <p>
-                To an incredible friend who deserves the world! May your year be filled with endless smiles, laughter, and beautiful moments. Thank you for being you. Have an amazing birthday! 🟩✨
-            </p>
+        <section class="surprise-section">
+            <div class="gift-container" id="giftTrigger" onclick="openGift()">
+                <div class="gift-box">🎁</div>
+                <p class="tap-text">TAP TO OPEN YOUR SURPRISE! ✨</p>
+            </div>
+            
+            <div id="secretMessage" class="hidden-message">
+                <h2>To an amazing friend! 💖</h2>
+                <p>
+                    Akansha, may your day be filled with infinite smiles, pure happiness, and as beautiful as a fresh field of tulips. Thank you for bringing so much color into everyone's lives. Have the best birthday celebration ever! 🟩✨
+                </p>
+            </div>
         </section>
 
-        <h2 class="gallery-title">Memories 📸</h2>
+        <h2 class="gallery-title">Some Beautiful Memories 📸</h2>
         
         <section class="gallery-grid">
-            <!-- Add as many as you need, matching your filenames 1.jpg, 2.jpg, etc. -->
             <div class="polaroid">
-                <img src="1.jpg" alt="Akansha">
+                <img src="1.jpg" alt="Akansha Picture 1">
                 <div class="polaroid-caption">Best Times ✨</div>
             </div>
             
             <div class="polaroid">
-                <img src="2.jpg" alt="Akansha">
+                <img src="2.jpg" alt="Akansha Picture 2">
                 <div class="polaroid-caption">Smiling Always 🌷</div>
             </div>
 
             <div class="polaroid">
-                <img src="3.jpg" alt="Akansha">
+                <img src="3.jpg" alt="Akansha Picture 3">
                 <div class="polaroid-caption">Favorite Memory 🤍</div>
             </div>
 
             <div class="polaroid">
-                <img src="4.jpg" alt="Akansha">
+                <img src="4.jpg" alt="Akansha Picture 4">
                 <div class="polaroid-caption">Happiest Day 🌟</div>
             </div>
         </section>
     </main>
 
     <script>
-        // Generating random floating tulips in the background
-        function createTulip() {
-            const container = document.getElementById('tulipContainer');
-            const tulip = document.createElement('div');
-            tulip.classList.add('floating-tulip');
-            tulip.innerText = '🌷';
+        // Target Date Logic: Akansha's Birthday (June 8, 2026)
+        const birthdayTarget = new Date("June 8, 2026 00:00:00").getTime();
+
+        const countdownInterval = setInterval(function() {
+            const rightNow = new Date().getTime();
+            const difference = birthdayTarget - rightNow;
+
+            // Calculate hours, minutes, and seconds remaining
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            if (difference <= 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "🥳 IT'S YOUR DAY! HAPPY BIRTHDAY AKANSHA! 🎈";
+            } else {
+                document.getElementById("countdown").innerHTML = `🎁 Your Birthday Surprise Unlocks In: ${hours}h ${minutes}m ${seconds}s`;
+            }
+        }, 1000);
+
+        // Music Toggling Controller
+        function toggleMusic() {
+            const audioTrack = document.getElementById("bgMusic");
+            const controllerIcon = document.getElementById("musicIcon");
             
-            tulip.style.left = Math.random() * 100 + 'vw';
-            tulip.style.animationDuration = Math.random() * 3 + 4 + 's'; // 4s to 7s
-            tulip.style.fontSize = Math.random() * 15 + 15 + 'px'; // 15px to 30px
-            
-            container.appendChild(tulip);
-            
-            setTimeout(() => {
-                tulip.remove();
-            }, 7000);
+            if (audioTrack.paused) {
+                audioTrack.play().catch(err => console.log("Audio playback interaction requirement triggered."));
+                controllerIcon.innerText = "⏸️";
+            } else {
+                audioTrack.pause();
+                controllerIcon.innerText = "🎵";
+            }
         }
 
-        // Keep spawning tulips smoothly
-        setInterval(createTulip, 400);
-    </script>
-</body>
-</html>
+        // Surprise Card reveal sequence
+        function openGift() {
+            document.getElementById("secretMessage").style.display = "block";
+            document.getElementById("giftTrigger").style.display = "none";
+            
+            // Rapid tulip burst effect execution upon box open
+            for(let i = 0; i < 30; i++) {
+                setTimeout(createTulip, i * 80);
+            }
+        }
+
+        // Generator functions for background floating aesthetic tulips 
+        function createTulip() {
+            const backgroundContainer = document.getElementById('tulipContainer');
+            const tulipElement = document.createElement('div');
+            tulipElement.classList.add('floating-tulip');
+            tulipElement.innerText = '🌷';
+            
+            tulipElement.style.left = Math.random() * 100 + 'vw';
+            tulipElement.style.animationDuration = Math.random() * 3 + 4 + 's'; // Variable 4s - 7s speed
+            tulipElement.style.fontSize = Math.random() * 15 + 15 + 'px'; // Random sizing between 15px and 30px
+            
+            backgroundContainer.appendChild(tulipElement);
+            
+            // Clean dynamic
