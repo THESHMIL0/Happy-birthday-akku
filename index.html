@@ -4,341 +4,444 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Akansha! 🌷</title>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Beautiful Aesthetic Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Playfair+Display:wght@700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     
+    <!-- Confetti Library (loads instantly from a fast server) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
     <style>
         :root {
-            --cute-green-bg: #f2f9f5;
-            --cute-green-main: #a3d9c9;
-            --cute-green-dark: #5a8f76;
-            --card-bg: #ffffff;
+            /* Cute Green Palette Refined */
+            --bg-color: #f7fffb;
+            --main-green: #c3ebd0; /* Soft Pastel */
+            --dark-green: #5c8f76; /* Gentle Dark */
+            --text-color: #4a4a4a;
+            --accent-pink: #fbeaf4; /* For contrast/tulips */
+            --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Quicksand', sans-serif;
-            background-color: var(--cute-green-bg);
-            color: var(--cute-green-dark);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             overflow-x: hidden;
             text-align: center;
-            padding-bottom: 5rem;
         }
 
-        /* Music Control Button */
-        .music-control {
+        /* --- Music Controller --- */
+        .music-btn {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--cute-green-main);
-            color: white;
-            width: 50px;
-            height: 50px;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            color: var(--dark-green);
+            border: 2px solid var(--main-green);
+            width: 60px; height: 60px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(90, 143, 118, 0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
             z-index: 1000;
-            font-size: 1.3rem;
-            transition: transform 0.2s;
+            font-size: 1.5rem;
+            transition: all 0.3s var(--ease-out-quint);
+        }
+        .music-btn:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
+        .music-btn.playing { animation: pulse 2s infinite; background: var(--main-green); }
+
+        /* --- Floating Tulips Background --- */
+        #tulipContainer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: -1;
+        }
+        .floating-tulip {
+            position: absolute; bottom: -50px;
+            font-size: 1.8rem;
+            animation: dynamicFloat linear infinite;
+            will-change: transform, opacity;
         }
 
-        .music-control:hover {
-            transform: scale(1.1);
+        /* --- Scroll Reveal Animation Logic --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s var(--ease-out-quint);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        /* Hero Section */
+        /* --- Hero Section --- */
         header {
-            padding: 5rem 2rem 2rem 2rem;
+            height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 0 2rem;
             position: relative;
         }
-
         h1 {
-            font-family: 'Caveat', cursive;
-            font-size: 4.5rem;
-            color: var(--cute-green-dark);
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            color: var(--dark-green);
             margin-bottom: 0.5rem;
-            animation: float 3s ease-in-out infinite;
+            line-height: 1.1;
         }
-
-        /* Countdown Timer */
+        .name { font-family: 'Caveat', cursive; color: #ff8fb1; font-size: 6rem; }
+        
         .countdown-timer {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--cute-green-dark);
-            margin-top: 15px;
-            background: rgba(255, 255, 255, 0.7);
-            display: inline-block;
-            padding: 10px 25px;
+            font-size: 1.2rem; font-weight: 700;
+            color: var(--dark-green);
+            margin-top: 30px;
+            background: white;
+            padding: 15px 30px;
             border-radius: 50px;
-            border: 1px solid var(--cute-green-main);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            border: 2px solid var(--main-green);
         }
 
-        /* Tulip Floating Background Animation */
-        .tulip-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
+        /* --- Main Content Styling --- */
+        main { max-width: 1200px; margin: 0 auto; padding: 5rem 1rem; }
 
-        /* Surprise Gift Box Section */
-        .surprise-section {
-            margin: 2rem auto;
-            max-width: 600px;
+        .birthday-message {
+            max-width: 700px; margin: 0 auto 8rem auto;
+            background: white; padding: 4rem;
+            border-radius: 30px;
+            box-shadow: 0 15px 40px rgba(163, 235, 208, 0.15);
+            border: 2px dashed var(--main-green);
+            position: relative;
         }
+        .birthday-message p { font-size: 1.3rem; line-height: 1.8; font-weight: 500; }
+        .message-icon { font-size: 3rem; position: absolute; top: -25px; left: 50%; transform: translateX(-50%); }
 
+        /* --- Gift Box Interactive --- */
         .gift-container {
-            cursor: pointer;
-            display: inline-block;
-            transition: transform 0.3s ease;
+            margin: 5rem 0 10rem 0; cursor: pointer; display: inline-block;
         }
-
-        .gift-container:hover {
-            transform: scale(1.1);
-        }
-
         .gift-box {
-            font-size: 4rem;
+            font-size: 6rem;
+            transition: transform 0.3s;
             animation: wobble 2s infinite;
         }
+        .gift-container:hover .gift-box { transform: scale(1.1); animation: none; }
+        .gift-text { font-weight: 700; color: var(--dark-green); margin-top: 15px; letter-spacing: 1px; }
 
-        .tap-text {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-top: 10px;
-            color: var(--cute-green-dark);
-            letter-spacing: 1px;
-        }
-
-        .hidden-message {
+        #specialCard {
             display: none;
-            margin: 0 auto;
-            padding: 2.5rem;
-            background: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(163, 217, 201, 0.4);
-            border: 2px dashed var(--cute-green-main);
-            animation: fadeIn 1s ease-in forwards;
-            width: 90%;
+            background: white; padding: 3rem; border-radius: 20px;
+            max-width: 500px; margin: -5rem auto 10rem auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            animation: popIn 0.6s var(--ease-out-quint) forwards;
+            border: 3px solid var(--main-green);
         }
 
-        .hidden-message h2 {
-            font-family: 'Caveat', cursive;
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .hidden-message p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        /* Photo Gallery - Polaroid Style */
-        .gallery-title {
-            font-family: 'Caveat', cursive;
-            font-size: 3.5rem;
-            margin: 4rem 0 1.5rem 0;
-        }
-
+        /* --- Advanced Polaroid Gallery --- */
+        .gallery-title { font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--dark-green); margin-bottom: 4rem; }
+        
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 4rem; padding: 0 1rem;
         }
 
         .polaroid {
-            background: var(--card-bg);
-            padding: 1.2rem 1.2rem 2.8rem 1.2rem;
-            box-shadow: 0 12px 25px rgba(0,0,0,0.06);
-            border-radius: 4px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: white;
+            padding: 1.5rem 1.5rem 4rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-radius: 5px;
+            transition: all 0.4s var(--ease-out-quint);
             cursor: pointer;
+            position: relative; overflow: hidden;
         }
-
         .polaroid img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            border-radius: 2px;
-            background-color: #f0f0f0; 
+            width: 100%; height: 320px; object-fit: cover;
+            border-radius: 3px; background-color: #f0f0f0;
+            transition: transform 0.5s ease;
         }
-
-        /* Random rotation angles for a realistic casual look */
-        .polaroid:nth-child(4n+1) { transform: rotate(-3deg); }
-        .polaroid:nth-child(4n+2) { transform: rotate(2deg); }
-        .polaroid:nth-child(4n+3) { transform: rotate(-1.5deg); }
-        .polaroid:nth-child(4n+4) { transform: rotate(3deg); }
-
         .polaroid:hover {
-            transform: scale(1.06) rotate(0deg) !important;
-            box-shadow: 0 20px 35px rgba(90, 143, 118, 0.25);
+            transform: scale(1.05) translateY(-10px) rotate(0deg) !important;
+            box-shadow: 0 25px 50px rgba(92, 143, 118, 0.2);
             z-index: 10;
         }
+        .polaroid:hover img { transform: scale(1.03); }
 
         .polaroid-caption {
-            font-family: 'Caveat', cursive;
-            font-size: 1.8rem;
-            margin-top: 1.2rem;
-            color: #333;
+            font-family: 'Caveat', cursive; font-size: 2.2rem;
+            margin-top: 1.5rem; color: #333;
         }
 
-        /* Keyframe Animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        /* Random slant for the gallery */
+        .polaroid:nth-child(even) { transform: rotate(3deg); }
+        .polaroid:nth-child(odd) { transform: rotate(-3deg); }
+
+        /* --- Lightbox / Fullscreen Image Viewer --- */
+        .lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.4s;
+            cursor: zoom-out;
+        }
+        .lightbox.active { display: flex; opacity: 1; }
+        .lightbox img {
+            max-width: 90%; max-height: 80%;
+            border-radius: 10px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            transform: scale(0.9); transition: transform 0.4s var(--ease-out-quint);
+        }
+        .lightbox.active img { transform: scale(1); }
+        .close-lightbox {
+            position: absolute; top: 30px; right: 30px;
+            font-size: 2rem; color: var(--dark-green); cursor: pointer;
         }
 
+        /* --- Keyframes & Animations --- */
+        @keyframes dynamicFloat {
+            0% { transform: translateY(105vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(-15vh) rotate(360deg); opacity: 0; }
+        }
         @keyframes wobble {
             0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-5deg); }
-            75% { transform: rotate(5deg); }
+            25% { transform: rotate(-8deg); }
+            75% { transform: rotate(8deg); }
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(163, 235, 208, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(163, 235, 208, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(163, 235, 208, 0); }
+        }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes dynamicTulip {
-            0% { transform: translateY(105vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-
-        .floating-tulip {
-            position: absolute;
-            bottom: -50px;
-            font-size: 1.5rem;
-            animation: dynamicTulip linear infinite;
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .name { font-size: 4rem; }
+            .gallery-grid { gap: 2rem; }
+            .polaroid img { height: 280px; }
+            .birthday-message { padding: 2rem; margin-bottom: 5rem; }
+            .gallery-title { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="tulip-bg" id="tulipContainer"></div>
+    <!-- Scroll Reveal Helper Section -->
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Run once on load
+        window.onload = reveal;
+    </script>
 
-    <div class="music-control" onclick="toggleMusic()">
+    <!-- Floating Background -->
+    <div id="tulipContainer"></div>
+
+    <!-- Music Control -->
+    <div class="music-btn" id="musicBtn" onclick="toggleMusic()">
         <span id="musicIcon">🎵</span>
         <audio id="bgMusic" loop>
             <source src="birthday-song.mp3" type="audio/mpeg">
         </audio>
     </div>
 
+    <!-- Hero Section -->
     <header>
-        <h1>Happy Birthday, Akansha! 🌷</h1>
-        <div id="countdown" class="countdown-timer">Calculating countdown...</div>
+        <div class="reveal active">
+            <h1>Happy Birthday,</h1>
+            <div class="name">Akansha</div>
+            <div id="countdown" class="countdown-timer">Loading countdown...</div>
+        </div>
     </header>
 
     <main>
-        <section class="surprise-section">
+        <!-- Birthday Letter Section -->
+        <section class="birthday-message reveal">
+            <div class="message-icon">🌷</div>
+            <p>
+                Akansha, wishing you a day that is as incredibly special as you are! May this year bring you endless laughter, beautiful adventures, and all the happiness in the world. You deserve it all. Have the most amazing birthday! ✨🟢
+            </p>
+        </section>
+
+        <!-- Surprise Box Section -->
+        <section class="reveal" style="text-align: center;">
             <div class="gift-container" id="giftTrigger" onclick="openGift()">
                 <div class="gift-box">🎁</div>
-                <p class="tap-text">TAP TO OPEN YOUR SURPRISE! ✨</p>
+                <p class="gift-text">CLICK FOR A SURPRISE! ✨</p>
             </div>
             
-            <div id="secretMessage" class="hidden-message">
-                <h2>To an amazing friend! 💖</h2>
-                <p>
-                    Akansha, may your day be filled with infinite smiles, pure happiness, and as beautiful as a fresh field of tulips. Thank you for bringing so much color into everyone's lives. Have the best birthday celebration ever! 🟩✨
-                </p>
+            <div id="specialCard">
+                <h2 style="font-family: 'Caveat', cursive; font-size: 3rem; color: #ff8fb1; margin-bottom:1rem;"> Surprise! </h2>
+                <p style="font-size:1.2rem; color:var(--dark-green); font-weight:700;">You are loved so much! Have the best day! 🎉🌷</p>
             </div>
         </section>
 
-        <h2 class="gallery-title">Some Beautiful Memories 📸</h2>
-        
-        <section class="gallery-grid">
-            <div class="polaroid">
-                <img src="1.jpg" alt="Akansha Picture 1">
-                <div class="polaroid-caption">Best Times ✨</div>
-            </div>
+        <!-- Photo Gallery -->
+        <section id="gallery" class="reveal">
+            <h2 class="gallery-title">Moments of Joy 📸</h2>
             
-            <div class="polaroid">
-                <img src="2.jpg" alt="Akansha Picture 2">
-                <div class="polaroid-caption">Smiling Always 🌷</div>
-            </div>
+            <div class="gallery-grid">
+                <!-- Polaroid 1 -->
+                <div class="polaroid" onclick="openLightbox('1.jpg')">
+                    <img src="1.jpg" alt="Memory 1">
+                    <div class="polaroid-caption">Best Times ✨</div>
+                </div>
+                
+                <!-- Polaroid 2 -->
+                <div class="polaroid" onclick="openLightbox('2.jpg')">
+                    <img src="2.jpg" alt="Memory 2">
+                    <div class="polaroid-caption">Smile Always 🌷</div>
+                </div>
 
-            <div class="polaroid">
-                <img src="3.jpg" alt="Akansha Picture 3">
-                <div class="polaroid-caption">Favorite Memory 🤍</div>
-            </div>
+                <!-- Polaroid 3 -->
+                <div class="polaroid" onclick="openLightbox('3.jpg')">
+                    <img src="3.jpg" alt="Memory 3">
+                    <div class="polaroid-caption">Favorite ✨</div>
+                </div>
 
-            <div class="polaroid">
-                <img src="4.jpg" alt="Akansha Picture 4">
-                <div class="polaroid-caption">Happiest Day 🌟</div>
+                <!-- Polaroid 4 -->
+                <div class="polaroid" onclick="openLightbox('4.jpg')">
+                    <img src="4.jpg" alt="Memory 4">
+                    <div class="polaroid-caption">Happiest Day 🤍</div>
+                </div>
             </div>
         </section>
     </main>
 
+    <!-- Lightbox Viewer -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+        <img src="" id="lightboxImg">
+    </div>
+
     <script>
-        // Target Date Logic: Akansha's Birthday (June 8, 2026)
-        const birthdayTarget = new Date("June 8, 2026 00:00:00").getTime();
+        // --- Countdown Logic (Sets Target to Tomorrow based on user's local time) ---
+        // Creates a date object for "tomorrow"
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 1); 
+        targetDate.setHours(0, 0, 0, 0); // Sets time to exactly midnight
 
         const countdownInterval = setInterval(function() {
-            const rightNow = new Date().getTime();
-            const difference = birthdayTarget - rightNow;
+            const now = new Date().getTime();
+            const distance = targetDate - now;
 
-            // Calculate hours, minutes, and seconds remaining
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            if (difference <= 0) {
+            const timerElement = document.getElementById("countdown");
+            
+            if (distance < 0) {
                 clearInterval(countdownInterval);
-                document.getElementById("countdown").innerHTML = "🥳 IT'S YOUR DAY! HAPPY BIRTHDAY AKANSHA! 🎈";
+                timerElement.innerHTML = "🥳 IT'S YOUR DAY! HAPPY BIRTHDAY AKANSHA! 🎈";
+                triggerConfetti(); // Optional auto-confetti on birthday
             } else {
-                document.getElementById("countdown").innerHTML = `🎁 Your Birthday Surprise Unlocks In: ${hours}h ${minutes}m ${seconds}s`;
+                timerElement.innerHTML = `🎁 Birthday Surprise Unlocks In: ${hours}h ${minutes}m ${seconds}s`;
             }
         }, 1000);
 
-        // Music Toggling Controller
-        function toggleMusic() {
-            const audioTrack = document.getElementById("bgMusic");
-            const controllerIcon = document.getElementById("musicIcon");
-            
-            if (audioTrack.paused) {
-                audioTrack.play().catch(err => console.log("Audio playback interaction requirement triggered."));
-                controllerIcon.innerText = "⏸️";
-            } else {
-                audioTrack.pause();
-                controllerIcon.innerText = "🎵";
+        // --- Confetti Logic (Explosion Effect) ---
+        function triggerConfetti() {
+            var count = 200;
+            var defaults = { origin: { y: 0.7 } };
+
+            function fire(particleRatio, opts) {
+                confetti(Object.assign({}, defaults, opts, {
+                    particleCount: Math.floor(count * particleRatio),
+                    colors: ['#c3ebd0', '#5c8f76', '#ff8fb1', '#ffffff'] // Palette colors
+                }));
             }
+
+            fire(0.25, { spread: 26, startVelocity: 55 });
+            fire(0.2, { spread: 60 });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fire(0.1, { spread: 120, startVelocity: 45 });
         }
 
-        // Surprise Card reveal sequence
+        // --- Surprise Box Logic ---
         function openGift() {
-            document.getElementById("secretMessage").style.display = "block";
+            document.getElementById("specialCard").style.display = "block";
             document.getElementById("giftTrigger").style.display = "none";
+            triggerConfetti(); // Real confetti explosion
+        }
+
+        // --- Music Player Logic ---
+        function toggleMusic() {
+            const audio = document.getElementById("bgMusic");
+            const btn = document.getElementById("musicBtn");
+            const icon = document.getElementById("musicIcon");
             
-            // Rapid tulip burst effect execution upon box open
-            for(let i = 0; i < 30; i++) {
-                setTimeout(createTulip, i * 80);
+            if (audio.paused) {
+                audio.play();
+                btn.classList.add('playing');
+                icon.innerText = "⏸️";
+            } else {
+                audio.pause();
+                btn.classList.remove('playing');
+                icon.innerText = "🎵";
             }
         }
 
-        // Generator functions for background floating aesthetic tulips 
+        // --- Lightbox Gallery Logic ---
+        function openLightbox(imgSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            lightboxImg.src = imgSrc;
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // --- Floating Tulips Generator ---
         function createTulip() {
-            const backgroundContainer = document.getElementById('tulipContainer');
-            const tulipElement = document.createElement('div');
-            tulipElement.classList.add('floating-tulip');
-            tulipElement.innerText = '🌷';
+            const container = document.getElementById('tulipContainer');
+            if(!container) return;
+            const tulip = document.createElement('div');
+            tulip.classList.add('floating-tulip');
             
-            tulipElement.style.left = Math.random() * 100 + 'vw';
-            tulipElement.style.animationDuration = Math.random() * 3 + 4 + 's'; // Variable 4s - 7s speed
-            tulipElement.style.fontSize = Math.random() * 15 + 15 + 'px'; // Random sizing between 15px and 30px
+            // Randomize tulip type or pink emoji
+            const types = ['🌷', '🌸', '🌷'];
+            tulip.innerText = types[Math.floor(Math.random() * types.length)];
             
-            backgroundContainer.appendChild(tulipElement);
+            tulip.style.left = Math.random() * 100 + 'vw';
+            tulip.style.animationDuration = Math.random() * 3 + 5 + 's'; // 5-8 seconds
+            tulip.style.fontSize = Math.random() * 10 + 15 + 'px'; // 15-25px
+            tulip.style.opacity = Math.random() * 0.5 + 0.3; // opacity between 0.3 and 0.8
+
+            container.appendChild(tulip);
             
-            // Clean dynamic
+            // Clean up elements after animation ends to save memory
+            setTimeout(() => { tulip.remove(); }, 8000);
+        }
+
+        // Start creating tulips, and keep creating them
+        for(let i=0; i<10; i++){ setTimeout(createTulip, i * 300); } // initial batch
+        setInterval(createTulip, 600); // Continuous flow
+    </script>
+</body>
+</html>
